@@ -14,8 +14,11 @@ function onScoreUpdate(dropPosition, bounciness, size, bucketLabel) {
 
 function runAnalysis() {
   // Write code here to analyze stuff
-  const bucket = knn(outputs);
-  console.log("your point will fall into ", bucket);
+  const [testSet, trainingSet] = splitDataSet(outputs, 10);
+  for (let i = 0; i < testSet.length; i++) {
+    const bucket = knn(trainingSet, testSet[i][0]);
+    console.log(bucket);
+  }
 }
 
 function knn(data, point) {
