@@ -16,14 +16,13 @@ function runAnalysis() {
   // Write code here to analyze stuff
   const testSetSize = 10;
   const [testSet, trainingSet] = splitDataSet(outputs, testSetSize);
-  let numberCorrect = 0;
-  for (let i = 0; i < testSet.length; i++) {
-    const bucket = knn(trainingSet, testSet[i][0]);
-    if (bucket === testSet[i][3]) {
-      numberCorrect++;
-    }
-  }
-  console.log("the accuracy is: ", numberCorrect / testSetSize);
+
+  const accuracy = _.chain(testSet)
+    .filter((testPoint) => knn(trainingSet, testPoint[0]) === testPoint[3])
+    .size()
+    .divide(testSetSize)
+    .value();
+  console.log("the accuracy is: ", accuracy);
 }
 
 function knn(data, point) {
