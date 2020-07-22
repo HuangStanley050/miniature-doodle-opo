@@ -2,7 +2,14 @@ const outputs = [];
 const predictionPoint = 300;
 
 function distance(pointA, pointB) {
-  return Math.abs(pointA - pointB);
+  return (
+    _.chain(pointA)
+      .zip(pointB)
+      .map(([a, b]) => (a - b) ** 2)
+      .sum()
+      .value() ** 0.5
+  );
+  //return Math.abs(pointA - pointB);
 }
 
 function onScoreUpdate(dropPosition, bounciness, size, bucketLabel) {
