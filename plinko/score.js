@@ -13,10 +13,10 @@ function onScoreUpdate(dropPosition, bounciness, size, bucketLabel) {
 
 function runAnalysis() {
   // Write code here to analyze stuff
-  const testSetSize = 10;
+  const testSetSize = 100;
   const [testSet, trainingSet] = splitDataSet(outputs, testSetSize);
 
-  _.range(1, 15).forEach((k) => {
+  _.range(1, 20).forEach((k) => {
     const accuracy = _.chain(testSet)
       .filter((testPoint) => knn(trainingSet, testPoint[0], k) === testPoint[3])
       .size()
