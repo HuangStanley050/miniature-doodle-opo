@@ -14,11 +14,16 @@ function onScoreUpdate(dropPosition, bounciness, size, bucketLabel) {
 
 function runAnalysis() {
   // Write code here to analyze stuff
-  const [testSet, trainingSet] = splitDataSet(outputs, 10);
+  const testSetSize = 10;
+  const [testSet, trainingSet] = splitDataSet(outputs, testSetSize);
+  let numberCorrect = 0;
   for (let i = 0; i < testSet.length; i++) {
     const bucket = knn(trainingSet, testSet[i][0]);
-    console.log(bucket);
+    if (bucket === testSet[i][3]) {
+      numberCorrect++;
+    }
   }
+  console.log("the accuracy is: ", numberCorrect / testSetSize);
 }
 
 function knn(data, point) {
